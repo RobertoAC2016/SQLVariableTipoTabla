@@ -1,0 +1,1 @@
+# SQL Variable Tipo Tabla
