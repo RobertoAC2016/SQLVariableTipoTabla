@@ -1,0 +1,46 @@
+
+--Veamos como se crea una variable de tipo tabla, llenarla con datos y mandarla a un Store Procedure
+
+--Primero creamos la tabla de tipo tabla con Type
+
+CREATE Type TempUsers as TABLE
+(
+	id int,
+	nombre varchar(50),
+	apellido varchar(50)
+);
+
+--Ahora validaremos como se usa, declarando la variable de tipo tabla con este tipo TempUsers
+
+Declare 
+	@Users as TempUsers;
+
+insert into @Users (id, nombre, apellido) values (1, 'Fulanito 1', 'Moreno 1');
+insert into @Users (id, nombre, apellido) values (2, 'Fulanito 2', 'Moreno 2');
+insert into @Users (id, nombre, apellido) values (3, 'Fulanito 3', 'Moreno 3');
+insert into @Users (id, nombre, apellido) values (4, 'Fulanito 4', 'Moreno 4');
+insert into @Users (id, nombre, apellido) values (5, 'Fulanito 5', 'Moreno 5');
+
+--select * from @Users;
+
+EXECUTE Nuevos_Usuarios @Users;
+
+--El Store Procedure es solo demostrativo y su funcion es recibir la tabla y mostra los datos
+
+
+CREATE PROCEDURE Nuevos_Usuarios
+(
+	@Usuarios TempUsers READONLY
+)
+As
+	select * from @Usuarios;
+
+--Esto sirve para q en un insert cuando son demasiados datos, se logre enviar una tabla en lugar
+--De un solo registro a la vez
+
+
+
+
+
+
+
